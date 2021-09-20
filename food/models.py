@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 class foodModels(models.Model):
     RATE = (
         ('3','Very good'),
@@ -8,13 +8,13 @@ class foodModels(models.Model):
     )
     AUTH = (
         ('Admins',(
-            ('A','Atid'),
-            ('R','Rahmat'),
-            ('N','Noora'),
+            ('Atid','Atid'),
+            ('Rahmat','Rahmat'),
+            ('Noora','Noora'),
         )),
         ('Normal people',(
-            ('Y','Yasin'),
-            ('E','Ebne')
+            ('Yasin','Yasin'),
+            ('Ebne','Ebne')
         )),
 
     )
@@ -22,7 +22,8 @@ class foodModels(models.Model):
     slug = models.SlugField(max_length=20)
     desc = models.TextField(default="add descriptions here.")
     rate = models.CharField(max_length=1, choices=RATE)
-    auth = models.CharField(max_length=1, choices=AUTH)  # special feature
+    auth = models.CharField(max_length=20, choices=AUTH)  # special feature
+    date = models.DateTimeField(default=timezone.now)
     img = models.ImageField(upload_to='foodPics/')
     check = models.BooleanField(default=False, verbose_name="آیا اجازه انتشار می‌دهید؟")
 
