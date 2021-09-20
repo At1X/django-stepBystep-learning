@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils import timezone
+class manageFood(models.Manager):
+    def show(self):
+        return self.filter(check=True)
 class foodModels(models.Model):
     RATE = (
         ('3','Very good'),
@@ -34,4 +37,6 @@ class foodModels(models.Model):
 
     def __str__(self):
         return self.name
+
+    objects = manageFood()
 # Create your models here.
