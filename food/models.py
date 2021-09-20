@@ -3,6 +3,18 @@ from django.utils import timezone
 class manageFood(models.Manager):
     def show(self):
         return self.filter(check=True)
+class Category(models.Model):
+    parent = models.ForeignKey('self', null=True, default=None, blank=True, on_delete=models.SET_NULL, related_name='children')
+    name = models.CharField(max_length=20)
+    slug = models.CharField(max_length=20)
+
+    class Meta:
+        verbose_name = 'گروه'
+        verbose_name_plural = 'گروه‌ ها'
+
+    def __str__(self):
+        return self.name
+
 class foodModels(models.Model):
     RATE = (
         ('3','Very good'),
@@ -27,6 +39,7 @@ class foodModels(models.Model):
     rate = models.CharField(max_length=1, choices=RATE)
     auth = models.CharField(max_length=20, choices=AUTH)  # special feature
     date = models.DateTimeField(default=timezone.now)
+    categ = models.ManyToManyField(Category, related_name='categs')
     img = models.ImageField(upload_to='foodPics/')
     check = models.BooleanField(default=False, verbose_name="آیا اجازه انتشار می‌دهید؟")
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import foodModels
+from .models import foodModels, Category
 from django.core.paginator import Paginator
 
 def homeView(request):
@@ -8,7 +8,8 @@ def homeView(request):
     page = request.GET.get('page')
     pageCONT = paginator.get_page(page)
     context = {
-        'foods': pageCONT
+        'foods': pageCONT,
+        'cat': Category.objects.all()
     }
     return render(request, 'index.html', context)
 def detailShow(request, theSLUG):
@@ -16,5 +17,9 @@ def detailShow(request, theSLUG):
         'details': foodModels.objects.get(slug=theSLUG)
     }
     return render(request, 'details.html', context)
-
+def categoryShow(request, categID):
+    context = {
+        'catp': Category.objects.get(slug=categID)
+    }
+    return render(request, 'category.html', context)
 # Create your views here.
