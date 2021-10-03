@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.html import format_html
+
 class manageFood(models.Manager):
     def show(self):
         return self.filter(check=True)
@@ -51,5 +53,8 @@ class foodModels(models.Model):
     def __str__(self):
         return self.name
 
+    def showPic(self):
+        return format_html("<img width=80 height=50 style= 'border-radius:10px;' src='{}'>".format(self.img.url))
+    showPic.short_description = 'عکس'
     objects = manageFood()
 # Create your models here.
