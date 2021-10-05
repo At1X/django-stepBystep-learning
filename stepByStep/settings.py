@@ -119,6 +119,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_ROOT = BASE_DIR / 'static' #in khat code ro add mikonim v python manage.py collectstatic mikonim ta tamami file haye static ro joda sazi kone. v baadesh in khat code ro cm mikonim.
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static", #baad az cm kardan bala in ro add mikonim ke be django mige static file ha ro azinja bekhoon.
+]
+
+
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
