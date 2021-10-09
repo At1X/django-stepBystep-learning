@@ -36,11 +36,11 @@
                     <hr class="my-4" />
                     {% endfor %}
                     <!-- Pager-->
-                    {% if foods.has_next %}
-                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'foodUrl:home' %}?page={{ foods.next_page_number }}">Next</a></div>
+                    {% if page_obj.has_next %}
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'foodUrl:home' %}?page={{ page_obj.next_page_number }}">Next</a></div>
                     {% endif %}
-                    {% if foods.has_previous %}
-                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'foodUrl:home' %}?page={{ foods.previous_page_number }}">Back</a></div>
+                    {% if page_obj.has_previous %}
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'foodUrl:home' %}?page={{ page_obj.previous_page_number }}">Back</a></div>
                      {% endif %}
                 </div>
             </div>
