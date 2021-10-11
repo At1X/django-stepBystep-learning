@@ -37,10 +37,25 @@ class DetDetailView(generic.DetailView):
     def get_object(self):
         slug = self.kwargs.get('theSLUG')
         return get_object_or_404(foodModels.objects.show(), slug=slug)
+        
 
-def categoryShow(request, categID):
-    context = {
-        'catp': Category.objects.get(slug=categID)
-    }
-    return render(request, 'category.html', context)
-# Create your views here.
+# def categoryShow(request, categID):
+#     context = {
+#         'catp': Category.objects.get(slug=categID)
+#     }
+#     return render(request, 'category.html', context)
+
+class CategoryShow(generic.ListView):
+    template_name = 'category.html'
+    paginate_by = 3
+    def get_queryset(self):
+        global categories
+        slug = self.kwargs.get('categID')
+        categories = get_object_or_404(Category, slug=slug)
+        return foodModels.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['catp'] = categories
+        return context
+
