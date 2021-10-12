@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import foodModels, Category
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.views import generic
 #
@@ -57,5 +58,19 @@ class CategoryShow(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['catp'] = categories
+        return context
+
+class AuthorShow(generic.ListView):
+    template_name = 'author_list.html'
+    paginate_by = 3
+    def get_queryset(self):
+        global user
+        username = self.kwargs.get('username')
+        user = get_object_or_404(User, username=username)
+        return User.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = user
         return context
 

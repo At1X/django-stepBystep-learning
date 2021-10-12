@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 class manageFood(models.Manager):
     def show(self):
         return self.filter(check=True)
@@ -33,6 +34,7 @@ class foodModels(models.Model):
         )),
 
     )
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='author', verbose_name='نویسنده')
     name = models.CharField(max_length=20)
     slug = models.SlugField(max_length=20)
     desc = models.TextField(default="add descriptions here.")
