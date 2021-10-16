@@ -54,4 +54,10 @@ class foodModels(models.Model):
         return self.name
 
     objects = manageFood()
+
+    # IMPORTANT
+    def categ_to_str(self):
+        return ", ".join([Category.name for Category in self.categ.all()])
+    categ_to_str.short_description = 'Category'
+    # IMPORTANT
 # Create your models here.

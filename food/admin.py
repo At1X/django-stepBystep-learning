@@ -18,11 +18,6 @@ class adminFoodModels(admin.ModelAdmin):
     list_filter = ('check',)
     actions = [make_pub,]
 
-    # IMPORTANT
-    def categ_to_str(self, obj):
-        return ", ".join([Category.name for Category in obj.categ.all()])
-    categ_to_str.short_description = 'Category'
-    # IMPORTANT
 
 @admin.register(Category)
 class categoryAdmin(admin.ModelAdmin):
