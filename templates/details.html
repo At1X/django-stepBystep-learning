@@ -15,7 +15,7 @@
         </header>
     <center>
     <div class="col-md-10 col-lg-8 col-xl-7">
-    <span class="subheading">{{ object.desc }}</span>
+    <span class="subheading">{{ object.desc|striptags }}</span>
     </div>
     </center>
 {% endblock %}

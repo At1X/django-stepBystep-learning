@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
 class manageFood(models.Manager):
@@ -52,7 +53,8 @@ class foodModels(models.Model):
 
     def __str__(self):
         return self.name
-
+    def get_absolute_url(self):
+        return reverse('account:home')
     objects = manageFood()
 
     # IMPORTANT

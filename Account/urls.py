@@ -1,6 +1,6 @@
 from django.contrib.auth import views
 from django.urls import path
-from .views import TheHome
+from .views import TheHome, MyCreateView
 app_name = 'account'
 
 urlpatterns = [
@@ -16,5 +16,6 @@ urlpatterns = [
     # path('reset/done/', views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 ]
 urlpatterns += [
-    path('', TheHome.as_view(), name='home' )
+    path('', TheHome.as_view(), name='home' ),
+    path('create', MyCreateView.as_view(), name='createArticle')
 ]
