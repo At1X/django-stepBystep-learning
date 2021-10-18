@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from django.contrib.auth.models import User
+from Account.models import User
 class manageFood(models.Manager):
     def show(self):
         return self.filter(check=True)
@@ -35,7 +35,7 @@ class foodModels(models.Model):
         )),
 
     )
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL,default='0' ,related_name='author', verbose_name='نویسنده')
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL,default='User.id',related_name='author', verbose_name='نویسنده')
     name = models.CharField(max_length=20)
     slug = models.SlugField(max_length=20)
     desc = models.TextField(default="add descriptions here.")

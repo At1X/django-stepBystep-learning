@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import foodModels, Category
-from django.contrib.auth.models import User
+from Account.models import User
 from django.core.paginator import Paginator
 from django.views import generic
 #

@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+# from .mixins import MyShowObjectMixin
 from django.views.generic import ListView, CreateView
 from food.models import foodModels
+# from .models import User
 @login_required()
 def home(request):
     return render(request, 'registration/home.html')
