@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .mixins import MyShowObjectMixin,FormValid
-from django.views.generic import ListView, CreateView
+from .mixins import MyShowObjectMixin,FormValid,ForbidAccess
+from django.views.generic import ListView, CreateView, UpdateView
 from food.models import foodModels
 # from .models import User
 @login_required()
@@ -18,5 +18,9 @@ class TheHome(LoginRequiredMixin, ListView):
             return foodModels.objects.filter(user=self.request.user)
     template_name = 'registration/home.html'
 class MyCreateView(LoginRequiredMixin,MyShowObjectMixin,FormValid, CreateView):
+    model = foodModels
+    template_name = 'registration/create-update.html'
+
+class MyUpdateView(LoginRequiredMixin,MyShowObjectMixin,FormValid,ForbidAccess, UpdateView):
     model = foodModels
     template_name = 'registration/create-update.html'

@@ -1,6 +1,6 @@
 from django.contrib.auth import views
 from django.urls import path
-from .views import TheHome, MyCreateView
+from .views import TheHome, MyCreateView,MyUpdateView
 app_name = 'account'
 
 urlpatterns = [
@@ -17,5 +17,6 @@ urlpatterns = [
 ]
 urlpatterns += [
     path('', TheHome.as_view(), name='home' ),
-    path('create', MyCreateView.as_view(), name='createArticle')
+    path('create', MyCreateView.as_view(), name='createArticle'),
+    path('update/<int:pk>', MyUpdateView.as_view(), name='updateArticle')
 ]

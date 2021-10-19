@@ -89,7 +89,11 @@
                   <tbody>
                   {% for article in object_list %}
                     <tr>
-                    <td>{{ article.name }}</td>
+                    {% if article.check == False or request.user.is_superuser%}
+                    <td><a href="{% url 'account:updateArticle' article.pk%}">{{ article.name }}</a></td>
+                    {% else %}
+                        <td>{{ article.name }}</td>
+                    {% endif %}
                     <td>{{ article.rate }}</td>
                     <td>{{ article.desc|truncatewords:20|safe }}</td>
                     <td>{{ article.categ_to_str }}</td>
