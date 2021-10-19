@@ -1,5 +1,7 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
+
 <html>
 <head>
   <meta charset="utf-8">
@@ -66,62 +68,15 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
       <div class="row">
-          <div class="col-12">
+          <div class="col-6 mx-auto my-auto">
             <div class="card">
               <div class="card-header">
-{#                <h3 class="card-title">Responsive Hover Table</h3>#}
-            <center>
-                <strong>{{ user.get_short_name }} عزیز خوش آمدید </strong>
-            </center>
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>اسم</th>
-                      <th>امتیاز</th>
-                      <th> خلاصه‌ی توضیحات</th>
-                      <th>گروه</th>
-                      <th>تصویر</th>
-                        <th>نویسنده</th>
-                        <th>وضعیت</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {% for article in object_list %}
-                    <tr>
-                    {% if article.check == False or request.user.is_superuser%}
-                    <td><a href="{% url 'account:updateArticle' article.pk%}">{{ article.name }}</a></td>
-                    {% else %}
-                        <td>{{ article.name }}</td>
-                    {% endif %}
-                    <td>{{ article.rate }}</td>
-                    <td>{{ article.desc|truncatewords:20|safe }}</td>
-                    <td>{{ article.categ_to_str }}</td>
-                    <td><img src="{{ article.img.url }}" width="100" height="100" style="border-radius: 10px"></td>
-                    <td>{{ article.user }}</td>
-                    <td>
-                        {% if article.check == True %}
-                            <center>
-                            منتشر شده
-                            </center>
-                            <a href="{% url 'foodUrl:detailView' article.slug %}" target="_blank">
-                            <span class="badge badge-success">نمایش در سایت</span>
-                            </a>
-                            {% else %}
-                            <center>
-                            <span class="badge badge-danger">منتشر نشده</span>
-                            </center>
-                        {% endif %}
-                    {% if user.is_superuser %}
-                        <center>
-                     <a href="{% url 'account:deleteArticle' article.pk %}"  style="color: #ffffff"><span class="badge badge-danger px-4 ">حذف</span></a>
-                    </center>{% endif %}
-                    </td>
-
-                    </tr>
-                  {% endfor %}
-                  </tbody>
-                </table>
+                <form method="post">{% csrf_token %}
+                    <center>
+                    <p>از حذف کردن مقاله‌ی «{{ object }}» مطئنید؟</p>
+                    <input type="submit" value="حذف">
+                        </center>
+                </form>
               </div>
               <!-- /.card-body -->
             </div>
@@ -175,3 +130,5 @@
 <script src="{% static 'adminlte/assest/js/demo.js'%}"></script>
 </body>
 </html>
+
+

@@ -1,8 +1,20 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .mixins import MyShowObjectMixin,FormValid,ForbidAccess
-from django.views.generic import ListView, CreateView, UpdateView
+from .mixins import (
+                                    MyShowObjectMixin,
+                                    FormValid,
+                                    ForbidAccess,
+                                    DeleteAccess,
+)
+from django.views.generic import (
+                                    ListView,
+                                    CreateView,
+                                    UpdateView,
+                                    DeleteView,
+)
+
 from food.models import foodModels
 # from .models import User
 @login_required()
@@ -24,3 +36,8 @@ class MyCreateView(LoginRequiredMixin,MyShowObjectMixin,FormValid, CreateView):
 class MyUpdateView(LoginRequiredMixin,MyShowObjectMixin,FormValid,ForbidAccess, UpdateView):
     model = foodModels
     template_name = 'registration/create-update.html'
+
+class AuthorDeleteView(DeleteAccess, DeleteView):
+    model = foodModels
+    success_url = reverse_lazy('account:home')
+    template_name = 'registration/deleteView.html'

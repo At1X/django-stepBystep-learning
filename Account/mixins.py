@@ -28,3 +28,10 @@ class ForbidAccess():
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404('You havent access to this page')
+        #end
+class DeleteAccess():
+    def dispatch(self,request, *args, **kwargs):
+        if self.request.user.is_superuser:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            raise Http404('You haven\'t access to this page')

@@ -1,6 +1,11 @@
 from django.contrib.auth import views
 from django.urls import path
-from .views import TheHome, MyCreateView,MyUpdateView
+from .views import (
+                        TheHome,
+                        MyCreateView,
+                        MyUpdateView,
+                        AuthorDeleteView,
+)
 app_name = 'account'
 
 urlpatterns = [
@@ -18,5 +23,6 @@ urlpatterns = [
 urlpatterns += [
     path('', TheHome.as_view(), name='home' ),
     path('create', MyCreateView.as_view(), name='createArticle'),
-    path('update/<int:pk>', MyUpdateView.as_view(), name='updateArticle')
+    path('update/<int:pk>', MyUpdateView.as_view(), name='updateArticle'),
+    path('delete/<int:pk>', AuthorDeleteView.as_view(), name='deleteArticle')
 ]
