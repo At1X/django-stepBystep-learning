@@ -83,7 +83,16 @@
                   {{ form.user|as_crispy_field }}
                   {{ form.check|as_crispy_field }}
                   {% endif %}
+                  {% if request.resolver_match.kwargs.pk %}
+                  <button class="btn btn-success" type="submit">ویرایش</button>
+                  {% else %}
                   <button class="btn btn-success" type="submit">ثبت</button>
+                    {% endif %}
+                  {% if request.resolver_match.kwargs.pk and request.user.is_superuser %}
+                      <a href="{% url 'account:deleteArticle' request.resolver_match.kwargs.pk %}">
+                    <button class="btn btn-danger" type="submit">حذف</button>
+                      </a>
+                    {% endif %}
               </form>
               </div>
               <!-- /.card-body -->
