@@ -111,6 +111,7 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = 'account:home'
 LOGIN_URL = 'account:login'
+LOGOUT_REDIRECT_URL = 'account:login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
