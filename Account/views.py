@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from .models import User
+from .forms import CustomForms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .mixins import (
                                     MyShowObjectMixin,
@@ -45,7 +46,16 @@ class AuthorDeleteView(DeleteAccess, DeleteView):
 class ProfileView(UpdateView):
     model = User
     template_name = 'registration/profile.html'
-    fields = ['username','first_name','last_name','email','vip_date']
+    form_class = CustomForms
     success_url = reverse_lazy('account:userProfile')
     def get_object(self, queryset=None):
         return User.objects.get(pk= self.request.user.pk)
+
+    def get_form_kwargs(self):
+        kwargs = super(ProfileView, self).get_form_kwargs()
+        kwargs.update(
+            {
+            'user': self.request.user
+            }
+        )
+        return kwargs
