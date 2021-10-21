@@ -12,7 +12,7 @@ def make_pub(modeladmin, request, queryset):
     modeladmin.message_user(request, "{} Maghale {}".format(row_up, massage))
 @admin.register(foodModels)
 class adminFoodModels(admin.ModelAdmin):
-    list_display = ('name', 'rate','user', 'check', 'categ_to_str')
+    list_display = ('name', 'rate','user', 'check','special_article', 'categ_to_str')
     search_fields = ('desc', 'name')
     prepopulated_fields = {'slug':('name',)}
     list_filter = ('check',)

@@ -14,8 +14,17 @@
 
         </header>
     <center>
+
     <div class="col-md-10 col-lg-8 col-xl-7">
-    <span class="subheading">{{ object.desc|striptags }}</span>
+        {% if object.special_article %}
+        {% if request.user.is_superuser or request.user.is_special_user %}
+        <span class="subheading">{{ object.desc|striptags }}</span>
+        {% else %}
+        <span class="subheading">با عرض پوزش این محتوا برای اعضای ویژه تهیه شده است برای خرید اشتراک می‌تونید <a href="#">اقدام</a> کنید</span>
+        {% endif %}
+            {% else %}
+            <span class="subheading">{{ object.desc|striptags }}</span>
+        {% endif %}
     </div>
     </center>
 {% endblock %}

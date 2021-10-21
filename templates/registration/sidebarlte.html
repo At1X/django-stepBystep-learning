@@ -34,19 +34,27 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="{% url 'account:userProfile' %}" class="nav-link {% if request.resolver_match.url_name == 'userProfile' %}active{% endif %}">
+                  <i class="fas fa-user"></i>
+                  <p>پروفایل کاربری
+                  <span class="right badge badge-success">تکمیل شده</span>
+                  </p>
+                </a>
+               </li>
               <li class="nav-item">
                 <a href="{% url 'account:home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
-                  <i class="fas fa-list nav-icon"></i>
+                  <i class="fas fa-list"></i>
                   <p>همه‌ی مقالات</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{% url 'account:createArticle' %}" class="nav-link {% if request.resolver_match.url_name == 'createArticle' %}active{% endif %}">
-                  <i class="far fa-edit nav-icon"></i>
+                  <i class="fas fa-plus"></i>
                   <p>افزودن مقاله جدید</p>
                 </a>
               </li>
-              <li class="nav-item">
+                <li class="nav-item">
                 <a href="{% url 'account:logout' %}" class="nav-link">
                   <i class="fas fa-sign-out-alt"></i>
                   <p>خروج از حساب</p>

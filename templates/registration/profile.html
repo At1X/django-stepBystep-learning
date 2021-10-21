@@ -71,28 +71,12 @@
             <div class="card">
               <div class="card-header">
               <form method="post" enctype="multipart/form-data"> {% csrf_token %}
-                  {{ form.name|as_crispy_field }}
-                  {{ form.slug|as_crispy_field }}
-                  {{ form.desc|as_crispy_field }}
-                  {{ form.rate|as_crispy_field }}
-                  {{ form.categ|as_crispy_field }}
-                  {{ form.img|as_crispy_field }}
-                  {% if user.is_superuser %}
-                  {{ form.date|as_crispy_field }}
-                  {{ form.user|as_crispy_field }}
-                  {{ form.check|as_crispy_field }}
-                  {{ form.special_article | as_crispy_field }}
-                  {% endif %}
-                  {% if request.resolver_match.kwargs.pk %}
-                  <button class="btn btn-success" type="submit">ویرایش</button>
-                  {% else %}
+                  {{ form.username|as_crispy_field }}
+                  {{ form.email|as_crispy_field }}
+                  {{ form.first_name|as_crispy_field }}
+                  {{ form.last_name|as_crispy_field }}
+                  {{ form.vip_date|as_crispy_field }}
                   <button class="btn btn-success" type="submit">ثبت</button>
-                    {% endif %}
-                  {% if request.resolver_match.kwargs.pk and request.user.is_superuser %}
-                      <a href="{% url 'account:deleteArticle' request.resolver_match.kwargs.pk %}">
-                    <button class="btn btn-danger" type="submit">حذف</button>
-                      </a>
-                    {% endif %}
               </form>
               </div>
               <!-- /.card-body -->

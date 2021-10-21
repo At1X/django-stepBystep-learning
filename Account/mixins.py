@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 class MyShowObjectMixin():
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_superuser:
-            self.fields = ['user', 'name', 'slug', 'desc', 'rate', 'auth', 'date', 'categ', 'img', 'check' ]
+            self.fields = ['user', 'name', 'slug', 'desc', 'rate', 'date', 'categ', 'img', 'check', 'special_article' ]
         else:
             self.fields = [ 'name', 'slug', 'desc', 'rate', 'categ', 'img',]
         return super().dispatch(request, *args, **kwargs)

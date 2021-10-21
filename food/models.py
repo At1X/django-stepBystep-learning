@@ -44,6 +44,7 @@ class foodModels(models.Model):
     date = models.DateTimeField(default=timezone.now)
     categ = models.ManyToManyField(Category, related_name='categs')
     img = models.ImageField(upload_to='foodPics/')
+    special_article = models.BooleanField(default=False, verbose_name="مقاله‌ی ویژه")
     check = models.BooleanField(default=False, verbose_name="آیا اجازه انتشار می‌دهید؟")
 
 

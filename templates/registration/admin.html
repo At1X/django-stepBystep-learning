@@ -83,6 +83,7 @@
                       <th>گروه</th>
                       <th>تصویر</th>
                         <th>نویسنده</th>
+                        <th>مقاله‌ی ویژه</th>
                         <th>وضعیت</th>
                     </tr>
                   </thead>
@@ -99,6 +100,13 @@
                     <td>{{ article.categ_to_str }}</td>
                     <td><img src="{{ article.img.url }}" width="100" height="100" style="border-radius: 10px"></td>
                     <td>{{ article.user }}</td>
+                    <td>
+                        {% if article.special_article %}
+                        بله
+                        {% else %}
+                        خیر
+                        {% endif %}
+                    </td>
                     <td>
                         {% if article.check == True %}
                             <center>
