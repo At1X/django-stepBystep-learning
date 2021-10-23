@@ -6,10 +6,12 @@ from django.contrib.auth import views
 from .forms import CustomForms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .mixins import (
-                                    MyShowObjectMixin,
+
                                     FormValid,
                                     ForbidAccess,
                                     DeleteAccess,
+                                    MyShowObjectMixin,
+                                    NormalUserForbidAcces,
 )
 from django.views.generic import (
                                     ListView,
@@ -25,7 +27,7 @@ def home(request):
     return render(request, 'registration/home.html')
 # Create your views here.
 
-class TheHome(LoginRequiredMixin, ListView):
+class TheHome(NormalUserForbidAcces, ListView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return foodModels.objects.all()

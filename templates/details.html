@@ -20,7 +20,9 @@
         {% if request.user.is_superuser or request.user.is_special_user %}
         <span class="subheading">{{ object.desc|striptags }}</span>
         {% else %}
-        <span class="subheading">با عرض پوزش این محتوا برای اعضای ویژه تهیه شده است برای خرید اشتراک می‌تونید <a href="#">اقدام</a> کنید</span>
+        <h3>{{ object.desc | truncatewords:30|safe }}</h3>
+            <hr>
+        <span class="subheading alert-warning">با عرض پوزش این محتوا برای اعضای ویژه تهیه شده است برای خرید اشتراک می‌تونید <a href="#">اقدام</a> کنید</span>
         {% endif %}
             {% else %}
             <span class="subheading">{{ object.desc|striptags }}</span>

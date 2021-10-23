@@ -42,7 +42,8 @@
                   </p>
                 </a>
                </li>
-              <li class="nav-item">
+                {% if user.is_superuser or user.is_author or user.is_author %}
+                              <li class="nav-item">
                 <a href="{% url 'account:home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
                   <i class="fas fa-list"></i>
                   <p>همه‌ی مقالات</p>
@@ -54,6 +55,8 @@
                   <p>افزودن مقاله جدید</p>
                 </a>
               </li>
+
+                {% endif %}
                 <li class="nav-item">
                 <a href="{% url 'account:logout' %}" class="nav-link">
                   <i class="fas fa-sign-out-alt"></i>

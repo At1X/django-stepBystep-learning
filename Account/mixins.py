@@ -1,7 +1,8 @@
 from django.http import Http404
 from django.utils import timezone
 from food.models import foodModels
-from django.shortcuts import render, get_object_or_404
+from .models import User
+from django.shortcuts import render, get_object_or_404, redirect
 class MyShowObjectMixin():
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_superuser:
@@ -36,4 +37,10 @@ class DeleteAccess():
         else:
             raise Http404('You haven\'t access to this page')
 
-
+class NormalUserForbidAcces():
+    def dispatch(self,request, *args, **kwargs):
+        user = self.request.user
+        if user.is_superuser or user.is_author or User.is_special_user == True:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('account:userProfile')
