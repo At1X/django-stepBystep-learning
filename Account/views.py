@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from .models import User
+from django.contrib.auth import views
 from .forms import CustomForms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .mixins import (
@@ -59,3 +60,13 @@ class ProfileView(UpdateView):
             }
         )
         return kwargs
+
+#this class uses to access login view and inherit views.loginView to edit this built-in class
+#uses to redirect users differently
+#use reverse instead of reverse_lazy
+class myOwnLogin(views.LoginView):
+    def get_redirect_url(self):
+        if self.request.user.is_superuser:
+            return reverse('account:home')
+        else:
+            return reverse('account:userProfile')

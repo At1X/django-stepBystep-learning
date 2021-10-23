@@ -35,3 +35,5 @@ class DeleteAccess():
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404('You haven\'t access to this page')
+
+
