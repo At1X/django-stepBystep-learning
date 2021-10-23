@@ -27,7 +27,7 @@ def home(request):
     return render(request, 'registration/home.html')
 # Create your views here.
 
-class TheHome(NormalUserForbidAcces, ListView):
+class TheHome(LoginRequiredMixin, NormalUserForbidAcces, ListView):
     def get_queryset(self):
         if self.request.user.is_superuser:
             return foodModels.objects.all()
@@ -72,3 +72,7 @@ class myOwnLogin(views.LoginView):
             return reverse('account:home')
         else:
             return reverse('account:userProfile')
+
+class MyPasswordChangeView(views.PasswordChangeView):
+    success_url = reverse_lazy('account:password_change_done')
+
