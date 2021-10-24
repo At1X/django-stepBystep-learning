@@ -12,6 +12,7 @@ from .mixins import (
                                     DeleteAccess,
                                     MyShowObjectMixin,
                                     NormalUserForbidAcces,
+                                    HasLoggined,
 )
 from django.views.generic import (
                                     ListView,
@@ -66,13 +67,10 @@ class ProfileView(UpdateView):
 #this class uses to access login view and inherit views.loginView to edit this built-in class
 #uses to redirect users differently
 #use reverse instead of reverse_lazy
-class myOwnLogin(views.LoginView):
+class myOwnLogin(HasLoggined ,views.LoginView):
     def get_redirect_url(self):
         if self.request.user.is_superuser:
             return reverse('account:home')
         else:
             return reverse('account:userProfile')
-
-class MyPasswordChangeView(views.PasswordChangeView):
-    success_url = reverse_lazy('account:password_change_done')
 

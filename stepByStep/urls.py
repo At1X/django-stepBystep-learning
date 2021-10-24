@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from Account.views import myOwnLogin
 
 
 urlpatterns = [
+    path('login', myOwnLogin.as_view(), name='login'),
+    path('',include('django.contrib.auth.urls')),
     path('admin' , admin.site.urls, name='admin'),
     path('', include('food.urls')),
     path('account/', include('Account.urls')),

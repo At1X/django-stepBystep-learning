@@ -44,3 +44,10 @@ class NormalUserForbidAcces():
             return super().dispatch(request, *args, **kwargs)
         else:
             return redirect('account:userProfile')
+class HasLoggined():
+    def dispatch(self,request, *args, **kwargs):
+        user = self.request.user
+        if user.is_authenticated:
+            return redirect('account:userProfile')
+        else:
+            return super().dispatch(request, *args, **kwargs)
