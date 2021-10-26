@@ -14,10 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
-from Account.views import myOwnLogin
+from Account.views import myOwnLogin, activate
 
 
 urlpatterns = [
@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin' , admin.site.urls, name='admin'),
     path('', include('food.urls')),
     path('account/', include('Account.urls')),
+    path('activate/<uidb64>/<token>/', activate, name='activate')
 ]
 
 
