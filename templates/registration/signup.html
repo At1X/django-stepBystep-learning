@@ -1,0 +1,67 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Wavy login form</title>
+  <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet"><link rel="stylesheet" href="{% static 'login/style.css'%}">
+    <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet"><link rel="stylesheet" href="{% static 'login/rtl.css'%}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body class="myfont">
+
+{% if form.non_field_errors %}
+    <center>
+<div class="errors">
+{% for error in form.non_field_errors %}
+    <span class="my-error">{{ error }}</span>
+{% endfor %}
+</div>
+    </center>
+{% endif %}
+
+{% block content %}
+  <form class="login" method="post">
+    {% csrf_token %}
+          <p>نام کاربری</p>
+        {{form.username}}
+        {% if form.username.errors %}
+    {% for error in form.username.errors %}
+        <p>{{ error }}</p>
+    {% endfor %}
+    {% endif %}
+
+        <p>رمز عبور</p>
+        {{form.password1}}
+        {% if form.password1.errors %}
+    {% for error in form.password1.errors %}
+        <p>{{ error }}</p>
+    {% endfor %}
+    {% endif %}
+
+            <p>تکرار رمز عبور</p>
+          {{form.password2}}
+        {% if form.password2.errors %}
+    {% for error in form.password2.errors %}
+        <p>{{ error }}</p>
+    {% endfor %}
+    {% endif %}
+
+            <p>ایمیل</p>
+          {{form.email}}
+        {% if form.email.errors %}
+    {% for error in form.email.errors %}
+        <p>{{ error }}</p>
+    {% endfor %}
+    {% endif %}
+
+    <button class="myfont" type="submit">ثبت نام</button>
+  </form>
+{% endblock %}
