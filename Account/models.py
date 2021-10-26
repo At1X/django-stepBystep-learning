@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     is_author = models.BooleanField(default=False)
     vip_date = models.DateField(default=timezone.now)
+    phone = models.IntegerField(max_length=11, verbose_name='شماره تلفن')
 
     def is_special_user(self):
         if self.vip_date > date.today():

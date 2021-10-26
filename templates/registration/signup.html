@@ -62,6 +62,14 @@
     {% endfor %}
     {% endif %}
 
+              <p>شماره تلفن</p>
+          {{form.phone}}
+        {% if form.phone.errors %}
+    {% for error in form.phone.errors %}
+        <p>{{ error }}</p>
+    {% endfor %}
+    {% endif %}
+
     <button class="myfont" type="submit">ثبت نام</button>
   </form>
 {% endblock %}
